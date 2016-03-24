@@ -59,6 +59,12 @@ At the very least, it is:
 In case of error, `ok` is false, and we provide an `error` key, with a string
 containing an error code.
 
+These are the expected common errors that the API could return:
+
+ - `invalid_params`: Received parameters are invalid, or incorrectly formatted.
+ - `not_authed`: No authentication token was provided.
+ - `invalid_auth`: Invalid authentication token.
+
 For example an unauthorized call yield a `403` HTTP status code, with this
 body:
 
@@ -109,14 +115,3 @@ When successful, the response will contain a `bookmark` object:
     }
 }
 ```
-
-**Errors**:
-
-These are the expected errors that this method will return. However, other
-errors can be returned in the case where the service is down, or other
-unexpected factors affect processing. Callers should always check the value of
-the `ok` param in the response.
-
- - `invalid_params`: Received parameters are invalid, or incorrectly formatted.
- - `not_authed`: No authentication token was provided.
- - `invalid_auth`: Invalid authentication token.
