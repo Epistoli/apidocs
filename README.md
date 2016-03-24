@@ -75,12 +75,56 @@ body:
 }
 ```
 
-Regardless, callers should always check the value of the `ok` param in the
+However, other errors can be returned in the case where the service is
+down, or other unexpected factors affect processing. Regardless,
+callers should **always** check the value of the `ok` param in the
 response.
+
 
 # API Methods
 
-## Save a bookmark
+## Newsletters
+
+### List newsletters
+
+**Method:**
+
+```
+GET /newsletters
+```
+
+**Parameters:**
+
+None.
+
+**Response:**
+
+When successful, the response will contain a `newsletters` key, as an
+`Array` of Newsletter objects:
+
+```json
+{
+    "ok": true,
+    "newsletters": [
+        {
+            "id": "foo-bar",
+            "name": "Foo Bar",
+            "description": "Some description",
+            "created_at": "2016-03-24T10:00:00.123Z"
+        },
+        {
+            "id": "another-letter",
+            "name": "Another Letter",
+            "description": "Some description",
+            "created_at": "2016-03-24T10:00:00.123Z"
+        }
+    ]
+}
+```
+
+## Bookmarks
+
+### Save a bookmark
 
 **Method:**
 
@@ -90,7 +134,8 @@ POST /bookmarks
 
 **Parameters:**
 
- - `url` (String), **required**,
+ - `url` (String), the URL you wish to save **required**,
+ - `newsletter_id` (String), the ID of the newsletter to which attach your bookmark **required**,
  - `title` (String) a title for your bookmarked document,
  - `description` (String) a short description,
  - `icon` (String) a URL to an icon image,
